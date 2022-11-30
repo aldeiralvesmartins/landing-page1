@@ -1,0 +1,50 @@
+https://hcode.com.br/cursos/database-developer
+https://github.com/dotlib/teste-desenvolvehdor-php/blob/master/teste-junior.md
+
+
+
+
+
+create table produto (
+idProduto int AUTO_INCREMENT ,    
+dtPedido date,
+codBarras varchar(250),
+nomeProduto varchar(250),
+quantidadePedido integer,
+    idCliente int,
+valorUnitario 	double,
+statusCliente ENUM('Aberto', 'Pago', 'Cancelado'),
+ CONSTRAINT pk_produto PRIMARY KEY  (idProduto),
+ CONSTRAINT fk_cliente FOREIGN KEY  (idCliente)
+ references cliente (idCliente)
+    
+ );
+ 
+ 
+ if (!empty($_GET['search]))
+ {
+ $data = $_GET['search'];
+ $sql = "SELECT * FROM cliente WHERE idCliente LIKE '%$data%' or nomeCliente LIKE '%$data%' or emailCliente  LIKE '%$data%' ORDER BY idCliente DESC";
+ }
+ ELSE
+ }
+ $sql = "SELECT * FROM cliente ORDER BY idCliente DESC";
+ }
+ $result = $pdo->query($sql);
+ 
+ 
+ 
+ 
+ <script>
+ var search document.getElementById('pesquisar');
+ search.addEventListener("keydown", function(event) {
+ if (event.key === "Enter")
+ {
+ searchData();
+ }
+ });
+ function searchData()
+ {
+ window.location = 'sistema.php?search=' +search.value;
+ }
+ </script>
