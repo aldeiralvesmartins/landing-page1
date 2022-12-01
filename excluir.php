@@ -9,5 +9,5 @@ if (!empty($_GET["id"])) {
 
     $sqlDelete = "DELETE FROM pedido where id = '$id'";
     $res = $pdo->query($sqlDelete);
-    header('location:listar.php');
+    header('location:index.php');
 }

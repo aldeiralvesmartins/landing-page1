@@ -35,7 +35,7 @@ if (!empty($_GET["id"])) {
 ?>
 
 <h2>EDITAR PEDIDO</h2>
-<a href="listar.php"><button>Voltar</button></a>
+<a href="index.php"><button>Voltar</button></a>
 <form method="POST"  class="form-group">
 
   <label >Nome</label><br>
@@ -97,7 +97,7 @@ if (isset($_POST["update"])) {
   $sqlUpdate = "UPDATE pedido SET dtPedido ='$dtPedido',codBarras='$codBarras',nomeProduto='$nomeProduto',quantidadePedido='$quantidade',
   nomeCliente ='$nomeCliente',emailCliente ='$email',statusCliente ='$status',cpfCliente='$cpf',valorUnitario='$valorU' where id ='$id'";
   $res = $pdo->query($sqlUpdate);
-header('location:listar.php');
+header('location:index.php');
 }
 
 
