@@ -37,7 +37,7 @@ require_once "config.php";
       </nav>
     </div>
   </aside> 
-  <div class="menu-spacing"></div>
+
   <section id="intro" class=" white-bg ">
 
     <div class="main-content">
@@ -90,7 +90,7 @@ require_once "config.php";
         $pedido = $pdo->query($cmd);
 
         $total = mysqli_num_rows($pedido);
-        $registros = 4;
+        $registros = 5;
         $numPaginas = ceil($total / $registros);
 
         $inicio = ($registros * $pagina) - $registros;
@@ -123,8 +123,8 @@ require_once "config.php";
           echo "<td>$ " . number_format($user_dado['valorUnitario'], 2, ',', ' ') . "</td>";
           echo "<td>" . $user_dado['quantidadePedido'] . "</td>";
           echo "<td>" . $user_dado['statusCliente'] . "</td>";
-          echo "<td><a id='editar' href='editar.php?id=" . $user_dado['id'] . "'><button>Editar</button></a>
-        <a id='editar'href='excluir.php?id=" . $user_dado['id'] . "'><button>Excluir</button></a>";
+          echo "<td><a id='editar' href='editar.php?id=" . $user_dado['id'] . "'><button id='azul'>Editar</button></a>
+        <a id='editar'href='excluir.php?id=" . $user_dado['id'] . "'><button id='vermelho'>Excluir</button></a>";
           echo "</td>";
           echo "</tr> ";
         }
@@ -258,6 +258,7 @@ require_once "config.php";
           <th></th>
         </tr>
         <?php
+        
         while ($user_dado = mysqli_fetch_assoc($res)) {
           echo "<tr>";
           echo "<td>" . $user_dado['nomeCliente'] . "</td>";

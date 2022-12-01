@@ -88,20 +88,21 @@ table caption {
 table td,
 table th {
     white-space: nowrap;
-    padding: 1rem;
-    text-align: left;
+    padding: 2px;
+    text-align: center;
     border: 0.1rem solid rgb(49, 39, 27);
 }
 
 tfoot td,
 table th {
     background: var(--light-gray-color);
+    
 }
 
 .main-d{
-    margin-bottom: 50px;
-    margin-top: 30px;
-    margin-left: 700px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-left: 500px;
     width: 80%;
     
 }
@@ -113,4 +114,11 @@ button#selecion {
 }
 
 input {width: 40%;} 
-input,  button {padding: 10px;}
+input,  button {padding: 10px;  margin: 1rem 0rem 1rem 1rem;}
+
+button#azul{
+    background: rgba(92, 150, 205, 0.781);
+}
+button#vermelho{
+    background: rgba(231, 81, 81, 0.781);
+}
