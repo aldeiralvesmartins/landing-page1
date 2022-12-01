@@ -36,14 +36,14 @@ require_once "config.php";
         </ul>
       </nav>
     </div>
-  </aside> 
+  </aside>
 
-  <section id="intro" class=" white-bg ">
+  <section id="intro" class="grid-one white-bg section">
 
     <div class="main-content">
       <h2>LISTA DE PEDIDOS</h2>
     </div>
-    <div class=" ">
+    <div class="main-content ">
       <?php
       $sql = "SELECT * FROM pedido order by id";
       $res = $pdo->query($sql);
@@ -72,16 +72,16 @@ require_once "config.php";
       </script>
       <table>
         <tr>
-        <th>Cliente</th>
-        <th>CPF</th>
-        <th>Email</th>
-        <th>Data</th>
-        <th>Codigo de Barra</th>
-        <th>Produto</th>
-        <th>Valor</th>
-        <th>Unidade</th>
-        <th>Status</th>
-        <th></th>
+          <th>Cliente</th>
+          <th>CPF</th>
+          <th>Email</th>
+          <th>Data</th>
+          <th>Codigo de Barra</th>
+          <th>Produto</th>
+          <th>Valor</th>
+          <th>Unidade</th>
+          <th>Status</th>
+          <th></th>
         </tr>
         <?php
         $pagina = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
@@ -128,8 +128,6 @@ require_once "config.php";
           echo "</td>";
           echo "</tr> ";
         }
-
-
         echo "<tr>";
         echo "<th></th>";
         echo "<th></th>";
@@ -186,10 +184,8 @@ require_once "config.php";
           }
         }
       }
-
       ?>
       <form method="post">
-
         <section id="home" met class="intro main-bg section">
           <div class="main-content intro-content">
             <div class="contact-form">
@@ -200,43 +196,53 @@ require_once "config.php";
                   <label>Nome</label>
                   <input type="text" placeholder=" " name="nomeCliente" v id="nomeCliente">
                 </div>
+
                 <div class="form-group">
                   <label>Email</label>
                   <input type="email" placeholder="" name="emailCliente" id="email">
                 </div>
+
                 <div class="form-group">
                   <label>Data da compra</label>
                   <input type="date" name="dtPedido" id="dtPedido">
                 </div>
+
                 <div class="form-group">
                   <label>CPF</label>
                   <input type="text" placeholder="" name="cpfCliente" id="cpf">
                 </div>
+
                 <div class="form-group ">
                   <label>Codigo de barra</label>
                   <input type="text" placeholder="" name="codBarras" id="codBarras">
                 </div>
+
                 <div class="form-group">
                   <label>Nome do produto</label>
                   <input type="text" placeholder=" " name="nomeProduto" id="nomeProduto">
                 </div>
+
                 <div class="form-group">
                   <label>Quantidade</label>
                   <input type="text" placeholder=" " name="quantidadePedido" id="quantidade">
                 </div>
+
                 <div class="form-group">
                   <label>Valor unitario</label>
                   <input type="text" placeholder=" " name="valorUnitario" id="valorUnitario">
-                </div>
-                <div class="radio">
-                  <input type="radio" name="statusCliente" value="Aberto"><br> Aberto 
-                  <input class="" type="radio" name="statusCliente" value="Pago"><br> Pago <br>
-                  <input type="radio" name="statusCliente" value="Cancelado"><br> Cancelado 
                 </div><br><br>
+
+                <div class="radio">
+                  <input type="radio" name="statusCliente" value="Aberto"><br> Aberto
+                  <input class="" type="radio" name="statusCliente" value="Pago"><br> Pago <br>
+                  <input type="radio" name="statusCliente" value="Cancelado"><br> Cancelado
+                </div><br><br>
+
                 <input type="hidden" name="id" value="id">
                 <div class="form-group full-width">
                   <button type="submit" value="Cadastrar">Cadastrar</button>
                 </div>
+
               </fieldset>
             </div>
           </div>
@@ -258,13 +264,13 @@ require_once "config.php";
           <th></th>
         </tr>
         <?php
-        
+
         while ($user_dado = mysqli_fetch_assoc($res)) {
           echo "<tr>";
           echo "<td>" . $user_dado['nomeCliente'] . "</td>";
           echo "<td>" . $user_dado['emailCliente'] . "</td>";
           echo "<td><a id='editar' href='detalhe.php?id=" . $user_dado['id'] . "'><button>Detalhes</button></a>";
-            echo "</td>";
+          echo "</td>";
           echo "</tr>";
         }
         ?>
