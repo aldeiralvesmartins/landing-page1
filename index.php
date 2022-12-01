@@ -90,7 +90,7 @@ require_once "config.php";
         $pedido = $pdo->query($cmd);
 
         $total = mysqli_num_rows($pedido);
-        $registros = 5;
+        $registros = 4;
         $numPaginas = ceil($total / $registros);
 
         $inicio = ($registros * $pagina) - $registros;

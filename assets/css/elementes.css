@@ -88,7 +88,7 @@ table caption {
 table td,
 table th {
     white-space: nowrap;
-    padding: 2px;
+    padding: 1px;
     text-align: center;
     border: 0.1rem solid rgb(49, 39, 27);
 }
