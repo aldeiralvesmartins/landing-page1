@@ -34,3 +34,7 @@ div.full-width {
     width: 100%;
     flex: 1 1 100%;
 }
+
+.radio {
+width: auto;
+}
