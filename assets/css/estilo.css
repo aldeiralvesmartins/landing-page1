@@ -1,0 +1,56 @@
+*{
+    background: #fafafa;
+    font-family: Arial;
+}
+
+h2{
+    
+    width: 60%;
+ 
+    float: right;
+  
+}
+   
+
+table{
+    background-color: rgba(5, 5, 5, 0.2);
+    width: 90%;
+    margin: 30px auto;
+}
+
+tr{
+    line-height: 30px;
+}
+tr#titulo{
+     background-color:#000000;
+    color: rgb(0, 0, 0);
+}
+td{
+    padding: 0px 10px;
+    text-align: center;
+    
+}
+form {
+    width: 60%;
+ 
+    float: right;
+}
+
+form.form-group {
+    margin: 30px auto;
+}
+
+a {
+    margin-left: 90px;
+}
+
+a#editar {
+    margin-left: 40px;
+
+}
+div#div {
+   
+    margin-left: 700px;
+    width: 60%;
+
+}
