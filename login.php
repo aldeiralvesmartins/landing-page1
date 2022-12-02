@@ -1,53 +1,45 @@
+
 <?php
-require_once "config.php";
+require_once "includes/header2.php";
 
-?>
+        if (!empty($_POST['emailCliente']) || !empty($_POST['senha'])) {
 
-<!DOCTYPE html>
-<html lang="pt-br">
+            if (strlen($_POST['emailCliente']) == 0) {
+                echo "Usuario ou senha invalidas";
+            } else if (strlen($_POST['senha']) == 0) {
+                echo "Usuario ou senha invalidas";
+            } else {
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing Page</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+                $email = $pdo->real_escape_string($_POST['emailCliente']);
+                $senha = $pdo->real_escape_string($_POST['senha']);
 
-    <link rel="stylesheet" href="assets/css/elementes.css">
-    <link rel="stylesheet" href="assets/css/classes.css">
-    <link rel="stylesheet" href="assets/css/variables.css">
-    <link rel="stylesheet" href="assets/css/menu.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-</head>
+                $sql = "SELECT  idCliente  FROM cliente  WHERE emailCliente = '$email' AND senha = '$senha'";
+                $sql_query = $pdo->query($sql);
 
+                $quantidade = $sql_query->num_rows;
 
-<section id="grid-one" class="grid-one main-bg section">
-    <div class="main-content grid-one-content">
-        <?php
+                if ($quantidade == 1) {
 
-        if (isset($_POST["sumit"])) {
+                    $usuario = $sql_query->fetch_assoc();
+                    $user_dado = mysqli_fetch_assoc($sql_query);
+                    if (!$_SESSION) {
+                        session_start();
+                    }
+                    $_SESSION['id'] = $usuario['id'];
+                    $_SESSION['nome'] = $usuario['nome'];
 
-
-
-            $email = $_POST['emailCliente'];
-            $senha = $_POST['senha'];
-
-                $sq = "SELECT  idCliente  FROM cliente  WHERE emailCliente ='$email' AND senha = '$senha'";
-                $res = $pdo->query($sql);
-
-            if (!empty($senha) && !empty($email)) {
-
-
-
-                header('location:index.php');
-                return true;
-            }else{
-                echo "senha ou email incorreto";
+                    header("location:cliente.php");
+                } else {
+                    echo "falha ao logar";
+                }
             }
         }
+
+
         ?>
+<section id="grid-one" class="grid-one main-bg section">
+    <div class="main-content grid-one-content"><a href="index.php">voltar</a>
+
         <form method="post">
             <section id="home" met class=" main-bg ">
                 <div class="intro-content">
@@ -64,7 +56,7 @@ require_once "config.php";
 
                             <div class="form-group ">
                                 <label>Senha</label>
-                                <input type="password" placeholder="" name="codBarras" id="codBarras">
+                                <input type="password" placeholder="" name="senha" id="codBarras">
                             </div>
 
                             <div class="form-group full-width">
