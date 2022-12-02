@@ -25,63 +25,45 @@ require_once "config.php";
 </head>
 
 <a href="index.php"><button>Voltar</button></a>
-<?php
-
-
-$sql = "SELECT * FROM pedido ORDER BY id DESC";
-$res = $pdo->query($sql);
-?>
 
 <table>
-    <th>Cliente</th>
-    <th>CPF</th>
-    <th>Email</th>
-    <th>Data</th>
-    <th>Codigo de Barra</th>
-    <th>Produto</th>
-    <th>Valor</th>
-    <th>Unidade</th>
-    <th>Status</th>
-    <th></th>
-    </tr>
-    <?php
-    $pagina = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
+  <th>CPF</th>
+  <th>Data</th>
+  <th>Codigo de Barra</th>
+  <th>Produto</th>
+  <th>Valor</th>
+  <th>Unidade</th>
+  <th>Status</th>
+  <th></th>
+  </tr>
+  <?php
 
-    $cmd = "select * from pedido";
-    $pedido = $pdo->query($cmd);
+  $id = $_GET["id"];
 
-    $total = mysqli_num_rows($pedido);
-    $registros = 5;
-    $numPaginas = ceil($total / $registros);
 
-    $inicio = ($registros * $pagina) - $registros;
+  $cmd = "SELECT * FROM `produto` WHERE idCliente = '$id'";
+  $idc = $pdo->query($cmd);
 
-    $cmd = "select * from pedido limit $inicio,$registros";
-    $pedido = $pdo->query($cmd);
-    $total = mysqli_num_rows($pedido);
 
-    while ($user_dado = mysqli_fetch_array($pedido)) {
-        echo "<tr>";
-        echo "<td>" . $user_dado['nomeCliente'] . "</td>";
-        echo "<td>" . $user_dado['cpfCliente'] . "</td>";
-        echo "<td>" . $user_dado['emailCliente'] . "</td>";
-        echo "<td>" . $user_dado['dtPedido'] . "</td>";
-        echo "<td>" . $user_dado['codBarras'] . "</td>";
-        echo "<td>" . $user_dado['nomeProduto'] . "</td>";
-        echo "<td>$ " . number_format($user_dado['valorUnitario'], 2, ',', ' ') . "</td>";
-        echo "<td>" . $user_dado['quantidadePedido'] . "</td>";
-        echo "<td>" . $user_dado['statusCliente'] . "</td>";
-        echo "<td><a id='editar' href='editar.php?id=" . $user_dado['id'] . "'><button>Editar</button></a>
-        <a id='editar'href='excluir.php?id=" . $user_dado['id'] . "'><button>Excluir</button></a>";
-        echo "</td>";
-        echo "</tr> ";
-    }
-   
-    ?>
+
+  while ($user_dado = mysqli_fetch_array($idc)) {
+    echo "<tr>";
+    echo "<td>" . $user_dado['cpfCliente'] . "</td>";
+    echo "<td>" . $user_dado['dtPedido'] . "</td>";
+    echo "<td>" . $user_dado['codBarras'] . "</td>";
+    echo "<td>" . $user_dado['nomeProduto'] . "</td>";
+    echo "<td>$ " . number_format($user_dado['valorUnitario'], 2, ',', ' ') . "</td>";
+    echo "<td>" . $user_dado['quantidadePedido'] . "</td>";
+    echo "<td>" . $user_dado['statusCliente'] . "</td>";
+    echo "<td><a id='editar' href='editar-detalhe.php?id=" . $user_dado['idCliente'] . "'><button>Editar</button></a>
+        <a id='editar'href='excluir.php?id=" . $user_dado['idCliente'] . "'><button>Excluir</button></a>";
+    echo "</td>";
+    echo "</tr> ";
+  }
+
+  ?>
 
 </table>
 <?php
- for ($i = 1; $i < $numPaginas + 1; $i++) {
-        echo "<a href='detalhe.php?pagina=$i'><button id='selecion'>" . $i . "</button></a> ";
-    }
+
 include 'includes/footer.php';

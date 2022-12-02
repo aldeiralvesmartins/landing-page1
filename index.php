@@ -31,7 +31,7 @@ require_once "config.php";
           <li><a href="#intro">Listagem de pedidos</a></li>
           <li><a href="#home">Cadastrar pedido</a></li>
           <li><a href="#gallery">Usuarios</a></li>
-          <li><a href="#pricing"></a></li>
+          <li><a href="login.php">Login</a></li>
           <li><a href="#listadem"></a></li>
         </ul>
       </nav>
@@ -253,7 +253,7 @@ require_once "config.php";
   <section id="gallery" class="grid-one white-bg section">
     <div class="main-content grid-one-content">
       <?php
-      $sql = "SELECT * FROM pedido order by id desc";
+      $sql = "SELECT * FROM `cliente`";
       $res = $pdo->query($sql);
       ?>
       <table>
@@ -269,7 +269,7 @@ require_once "config.php";
           echo "<tr>";
           echo "<td>" . $user_dado['nomeCliente'] . "</td>";
           echo "<td>" . $user_dado['emailCliente'] . "</td>";
-          echo "<td><a id='editar' href='detalhe.php?id=" . $user_dado['id'] . "'><button>Detalhes</button></a>";
+          echo "<td><a  href='detalhe.php?id=" . $user_dado['idCliente'] . "'><button>Detalhes</button></a>";
           echo "</td>";
           echo "</tr>";
         }
