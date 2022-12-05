@@ -34,7 +34,7 @@ if (!empty($_GET["id"])) {
 ?>
 
 <h2>EDITAR PEDIDO</h2>
-<a href="detalhe.php"><button>Voltar</button></a>
+<a href="cliente.php"><button>Voltar</button></a>
 <form method="POST" class="form-group">
 
 
@@ -94,7 +94,7 @@ if (isset($_POST["update"])) {
     $sqlUpdate = "UPDATE produto SET dtPedido ='$dtPedido',codBarras='$codBarras',nomeProduto='$nomeProduto',quantidadePedido='$quantidade',
   statusCliente ='$status',cpfCliente='$cpf',valorUnitario='$valorU' where idProduto ='$id1'";
     $res = $pdo->query($sqlUpdate);
-    header('location:detalhe.php');
+    header('location:cliente.php');
   } else {
     echo 'preencha todos campos';
   }

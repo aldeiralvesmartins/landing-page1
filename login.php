@@ -38,7 +38,7 @@ require_once "includes/header2.php";
 
         ?>
 <section id="grid-one" class="grid-one main-bg section">
-    <div class="main-content grid-one-content"><a href="index.php">voltar</a>
+    <div class="main-content grid-one-content"><a href="index.php"><button>Voltar</button></a>
 
         <form method="post">
             <section id="home" met class=" main-bg ">

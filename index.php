@@ -29,10 +29,11 @@ require_once "config.php";
       <nav>
         <ul>
           <li><a href="#intro">Listagem de pedidos</a></li>
-          <li><a href="#home">Cadastrar pedido</a></li>
+          <li><a href="#cadastrar">Cadastrar pedido</a></li>
           <li><a href="#gallery">Usuarios</a></li>
+          <li><a href="#status-pedido">Status pedido</a></li>
           <li><a href="login.php">Login</a></li>
-          <li><a href="#listadem"></a></li>
+          
         </ul>
       </nav>
     </div>
@@ -41,23 +42,24 @@ require_once "config.php";
   <section id="intro" class="grid-one white-bg section">
 
     <div class="main-content">
-      <h2>LISTA DE PEDIDOS</h2>
+      <h2>LISTA DE PEDIDOS </h2>
+      <div class="main-d"><input type="search" name="pesquisar" placeholder="Pesquisar" id="pesquisar"><button onclick="searchData()" id="pesquisar">pesquisar</button></div>
     </div>
-    <div class="main-content ">
+    <div class=" ">
       <?php
       $sql = "SELECT * FROM pedido order by id";
       $res = $pdo->query($sql);
-      ?>
-      <?php
+
+
+     
       if (!empty($_GET['search'])) {
         $data = $_GET['search'];
-        $sql = "SELECT * FROM pedido WHERE id LIKE '%$data%' or nomeCliente LIKE '%$data%' or emailCliente  LIKE '%$data%'or cpfCliente  LIKE '%$data%'or dtPedido  LIKE '%$data%' ORDER BY id DESC";
+        $sql = "SELECT * FROM pedido WHERE id LIKE '%$data%' or nomeCliente LIKE '%$data%' or emailCliente  LIKE '%$data%'or cpfCliente  LIKE '%$data%'or dtPedido  LIKE '%$data%' or statusCliente  LIKE '%$data%' ORDER BY id DESC";
       } else {
         $sql = "SELECT * FROM pedido ORDER BY id DESC";
       }
       $res = $pdo->query($sql);
       ?>
-      <div class="main-d"><input type="search" name="pesquisar" placeholder="Pesquisar" id="pesquisar"><button onclick="searchData()" id="pesquisar">pesquisar</button></div>
       <script>
         var search = document.getElementById('pesquisar');
         search.addEventListener("keydown", function(event) {
@@ -69,6 +71,7 @@ require_once "config.php";
         function searchData() {
           window.location = 'index.php?search=' + search.value;
         }
+        
       </script>
       <table>
         <tr>
@@ -128,21 +131,7 @@ require_once "config.php";
           echo "</td>";
           echo "</tr> ";
         }
-        echo "<tr>";
-        echo "<th></th>";
-        echo "<th></th>";
-        echo "<th></th>";
-        echo "<ht></th>";
-        echo "<th></th>";
-        echo "<th></th>";
-        echo "<th></th>";
-        echo "<th></th>";
-        echo "<th></th>";
-        echo "<th></th>";
-        echo "<th></th>";
-        echo "</tr> ";
-
-        for ($i = 1; $i < $numPaginas + 1; $i++) {
+                for ($i = 1; $i < $numPaginas + 1; $i++) {
           echo "<a href='index.php?pagina=$i'><button id='selecion'>" . $i . "</button></a> ";
         }
         ?>
@@ -186,8 +175,8 @@ require_once "config.php";
       }
       ?>
       <form method="post">
-        <section id="home" met class="intro main-bg section">
-          <div class="main-content intro-content">
+      <section id="cadastrar" class="grid-one main-bg section">
+    <div class="main-content grid-one-content">
             <div class="contact-form">
               <h2>Cadastro de Pedido</h2>
               <fieldset class="form-grid">
@@ -277,13 +266,46 @@ require_once "config.php";
       </table>
     </div>
   </section>
-  <section id="listagem" class="white-bg section">
+  <section id="status-pedido" class="white-bg section">
     <div class="main-content top3-content">
 
 
       <div class="responsive-table">
+<?php
+      $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Aberto%'";
+      $status = $pdo->query($cmd);
 
+      $totalA = mysqli_num_rows($status);
+      
+      $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Pago%'";
+      $status = $pdo->query($cmd);
 
+      $totalP = mysqli_num_rows($status);
+      
+      $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Cancelado%'";
+      $status = $pdo->query($cmd);
+
+      $totalC = mysqli_num_rows($status);//var_dump($total);exit;
+
+      ?>
+  
+      <table>
+      <h3>Status pedido</h3><br>
+      <tr>
+        <th>Total Aberto</th>
+        <th>Total Pago</th>
+        <th>Total Cancelado</th>
+      </tr>
+      <?php
+        echo "<tr>";
+        echo "<td>" . $totalA . "</td>";
+        echo "<td>" . $totalP. "</td>";
+        echo "<td>" . $totalC ."</td>";
+        echo "</tr>";
+      
+      ?>
+    </table>
+  
       </div>
 
     </div>

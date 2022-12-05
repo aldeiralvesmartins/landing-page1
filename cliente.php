@@ -31,7 +31,7 @@ require_once "config.php";
           <li><a href="#intro">Meus pedidos</a></li>
           <li><a href="cadastroProduto.php">Cadastrar pedido</a></li>
           <li><a href="#gallery">Produtos</a></li>
-  
+
         </ul>
       </nav>
     </div>
@@ -42,12 +42,12 @@ require_once "config.php";
     <div class="main-content">
       <h2>LISTA DE PEDIDOS</h2>
     </div>
-    <div class="main-content ">
+    <div class=" ">
       <?php
-      $sql = "SELECT * FROM pedido order by id";
+      $sql = "SELECT * FROM produto order by idCliente";
       $res = $pdo->query($sql);
       ?>
-      
+
       <table>
         <tr>
           <th>Data</th>
@@ -85,19 +85,19 @@ require_once "config.php";
 
         while ($user_dado = mysqli_fetch_array($sel)) {
           echo "<tr>";
-        
+
           echo "<td>" . $user_dado['dtPedido'] . "</td>";
           echo "<td>" . $user_dado['codBarras'] . "</td>";
           echo "<td>" . $user_dado['nomeProduto'] . "</td>";
           echo "<td>$ " . number_format($user_dado['valorUnitario'], 2, ',', ' ') . "</td>";
           echo "<td>" . $user_dado['quantidadePedido'] . "</td>";
           echo "<td>" . $user_dado['statusCliente'] . "</td>";
-          echo "<td><a id='editar' href='editar.php?id=" . $user_dado['idProduto'] . "'><button id='azul'>Editar</button></a>
-        <a id='editar'href='excluir.php?id=" . $user_dado['idProduto'] . "'><button id='vermelho'>Excluir</button></a>";
+          echo "<td><a id='editar' href='editar-detalhe.php?id=" . $user_dado['idProduto'] . "'><button id='azul'>Editar</button></a>
+        <a id='editar'href='excluir-detalhe.php?id=" . $user_dado['idProduto'] . "'><button id='vermelho'>Excluir</button></a>";
           echo "</td>";
           echo "</tr> ";
         }
-     
+
 
         for ($i = 1; $i < $numPaginas + 1; $i++) {
           echo "<a href='cliente.php?pagina=$i'><button id='selecion'>" . $i . "</button></a> ";
@@ -106,32 +106,32 @@ require_once "config.php";
         <?php
 
 
-if (!empty($_GET['search'])) {
-  $data = $_GET['search'];
-  $sql = "SELECT * FROM pedido WHERE id LIKE '%$data%' or nomeProduto LIKE '%$data%' or emailCliente  LIKE '%$data%'or cpfCliente  LIKE '%$data%'or dtPedido  LIKE '%$data%' ORDER BY id DESC";
-} else {
-  $sql = "SELECT * FROM pedido ORDER BY id DESC";
-}
-$res = $pdo->query($sql);
-?>
-<div class="main-d"><input type="search" name="pesquisar" placeholder="Pesquisar" id="pesquisar"><button onclick="searchData()" id="pesquisar">pesquisar</button></div>
-<script>
-  var search = document.getElementById('pesquisar');
-  search.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      searchData();
-    }
-  });
+        if (!empty($_GET['search'])) {
+          $data = $_GET['search'];
+          $sql = "SELECT * FROM pedido WHERE id LIKE '%$data%' or nomeProduto LIKE '%$data%' or emailCliente  LIKE '%$data%'or cpfCliente  LIKE '%$data%'or dtPedido  LIKE '%$data%' ORDER BY id DESC";
+        } else {
+          $sql = "SELECT * FROM pedido ORDER BY id DESC";
+        }
+        $res = $pdo->query($sql);
+        ?>
+        <div class="main-d"><input type="search" name="pesquisar" placeholder="Pesquisar" id="pesquisar"><button onclick="searchData()" id="pesquisar">pesquisar</button></div>
+        <script>
+          var search = document.getElementById('pesquisar');
+          search.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+              searchData();
+            }
+          });
 
-  function searchData() {
-    window.location = 'cliente.php?search=' + search.value;
-  }
-</script>
+          function searchData() {
+            window.location = 'cliente.php?search=' + search.value;
+          }
+        </script>
 
       </table>
     </div>
   </section>
- 
+
 
 
 

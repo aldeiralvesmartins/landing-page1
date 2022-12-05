@@ -96,7 +96,7 @@ table th {
 tfoot td,
 table th {
     background: var(--light-gray-color);
-    
+    max-width: 120rem;
 }
 
 .main-d{
