@@ -24,8 +24,8 @@ if (!empty($_GET["id"])) {
     $dtPedido = $user_dado['dtPedido'];
     $codBarras = $user_dado['codBarras'];
     $nomeProduto = $user_dado['nomeProduto'];
-     $valorU = $user_dado['quantidadePedido'];
-    $quantidade = $user_dado['valorUnitario'];
+    $valorU = $user_dado['valorUnitario'];
+    $quantidade = $user_dado['quantidadePedido'];
     $status = $user_dado['statusCliente'];
   }
 }
@@ -54,13 +54,13 @@ if (!empty($_GET["id"])) {
   <input type="text" placeholder="" name="codBarras" id="codBarras" value="<?php echo  $codBarras ?>"><br><br>
   <label >Nome do produto</label>
 <br>
-  <input type="text" placeholder=" " name="quantidadePedido" id="quantidade" value="<?php echo $quantidade ?>"><br><br>
+  <input type="text" placeholder=" " name="nomeProduto" id="nomeProduto" value="<?php echo $nomeProduto  ?>"><br><br>
   <label >Valor unitario</label>
 <br>
-<input type="text" placeholder=" " name="nomeProduto" id="nomeProduto" value="<?php echo $nomeProduto ?>"><br><br>
+<input type="text" placeholder=" " name="valorUnitario" id="valorUnitario" value="<?php echo $valorU  ?>"><br><br>
   <label >Quantidade</label>
 <br>
-  <input type="text" placeholder=" " name="valorUnitario" id="valorUnitario" value="<?php echo $valorU ?>"><br><br>
+  <input type="text" placeholder=" " name="quantidadePedido" id="quantidade" value="<?php echo $quantidade?>"><br><br>
   <label >Status</label>
 <br>
   <input type="radio" name="statusCliente" value="Aberto" <?php echo ($status == 'Aberto') ?  'checked' : '' ?>> Aberto
