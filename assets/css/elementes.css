@@ -96,13 +96,21 @@ table th {
 tfoot td,
 table th {
     background: var(--light-gray-color);
-    max-width: 120rem;
+    
 }
 
 .main-d{
     margin-bottom: 30px;
     margin-top: 20px;
     margin-left: 500px;
+    width: 80%;
+    
+}
+.main-da{
+    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-left: 30%;
+    padding-bottom: none;
     width: 80%;
     
 }

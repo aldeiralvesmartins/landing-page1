@@ -10,7 +10,7 @@ require_once "config.php";
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Landing Page</title>
+  <title>Cadastro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@ require_once "config.php";
 <body class="main-bg">
   <aside class="menu">
     <div class="main-content menu-content">
-      <h1><a href="#home">HOME</a></h1>
+      <h1><a href="#intro">HOME</a></h1>
       <nav>
         <ul>
           <li><a href="#intro">Listagem de pedidos</a></li>
@@ -42,10 +42,11 @@ require_once "config.php";
   <section id="intro" class="grid-one white-bg section">
 
     <div class="main-content">
-      <h2>LISTA DE PEDIDOS </h2>
-      <div class="main-d"><input type="search" name="pesquisar" placeholder="Pesquisar" id="pesquisar"><button onclick="searchData()" id="pesquisar">pesquisar</button></div>
+    <h2>LISTA DE PEDIDOS </h2>
     </div>
     <div class=" ">
+    <div class="main-d"><input type="search" name="pesquisar" placeholder="Pesquisar" id="pesquisar"><button onclick="searchData()" id="pesquisar">pesquisar</button></div>
+
       <?php
       $sql = "SELECT * FROM pedido order by id";
       $res = $pdo->query($sql);
@@ -135,7 +136,7 @@ require_once "config.php";
           echo "<a href='index.php?pagina=$i'><button id='selecion'>" . $i . "</button></a> ";
         }
         ?>
-
+        
       </table>
     </div>
   </section>
