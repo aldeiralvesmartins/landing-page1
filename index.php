@@ -75,6 +75,24 @@ require_once "config.php";
         
       </script>
       <table>
+      <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>
+            <select  name="" id="">
+              <option onclick="searchData()" value="Aberto">Aberto</option>
+              <option onclick="searchData()"  value="Pago">Pago</option>
+              <option onclick="searchData()" value="Cancelado">Cancelado</option>
+            </select>
+          </th>
+          <th></th>
+        </tr>
         <tr>
           <th>Cliente</th>
           <th>CPF</th>
@@ -94,7 +112,7 @@ require_once "config.php";
         $pedido = $pdo->query($cmd);
 
         $total = mysqli_num_rows($pedido);
-        $registros = 4;
+        $registros = 10;
         $numPaginas = ceil($total / $registros);
 
         $inicio = ($registros * $pagina) - $registros;
@@ -103,6 +121,7 @@ require_once "config.php";
         $pedido = $pdo->query($cmd);
         $total = mysqli_num_rows($pedido);
 
+  
         switch (@$sel) {
           case !isset($_GET['search']):
             $sel = $res;
@@ -111,10 +130,6 @@ require_once "config.php";
             $sel = $pedido;
             break;
         }
-        $cmd = "SELECT SUM(valorUnitario)
-        FROM pedido GROUP BY valorUnitario";
-        $sum = $pdo->query($cmd);
-
 
         while ($user_dado = mysqli_fetch_array($sel)) {
           echo "<tr>";
@@ -304,6 +319,7 @@ require_once "config.php";
         echo "<td>" . $totalC ."</td>";
         echo "</tr>";
       
+       
       ?>
     </table>
   

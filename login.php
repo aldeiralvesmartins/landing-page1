@@ -33,6 +33,8 @@ require_once "includes/header2.php";
                     echo "falha ao logar";
                 }
             }
+        }else{
+            echo "Preencha todos campos";
         }
 
 
