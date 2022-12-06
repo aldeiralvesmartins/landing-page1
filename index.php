@@ -33,7 +33,7 @@ require_once "config.php";
           <li><a href="#gallery">Usuarios</a></li>
           <li><a href="#status-pedido">Status pedido</a></li>
           <li><a href="login.php">Login</a></li>
-          
+
         </ul>
       </nav>
     </div>
@@ -42,17 +42,17 @@ require_once "config.php";
   <section id="intro" class="grid-one white-bg section">
 
     <div class="main-content">
-    <h2>LISTA DE PEDIDOS </h2>
+      <h2>LISTA DE PEDIDOS </h2>
     </div>
     <div class=" ">
-    <div class="main-d"><input type="search" name="pesquisar" placeholder="Pesquisar" id="pesquisar"><button onclick="searchData()" id="pesquisar">pesquisar</button></div>
+      <div class="main-d"><input type="search" name="pesquisar" placeholder="Pesquisar" id="pesquisar"><button onclick="searchData()" id="pesquisar">pesquisar</button></div>
 
       <?php
       $sql = "SELECT * FROM pedido order by id";
       $res = $pdo->query($sql);
 
 
-     
+
       if (!empty($_GET['search'])) {
         $data = $_GET['search'];
         $sql = "SELECT * FROM pedido WHERE id LIKE '%$data%' or nomeCliente LIKE '%$data%' or emailCliente  LIKE '%$data%'or cpfCliente  LIKE '%$data%'or dtPedido  LIKE '%$data%' or statusCliente  LIKE '%$data%' ORDER BY id DESC";
@@ -72,10 +72,9 @@ require_once "config.php";
         function searchData() {
           window.location = 'index.php?search=' + search.value;
         }
-        
       </script>
       <table>
-      <tr>
+        <tr>
           <th></th>
           <th></th>
           <th></th>
@@ -85,9 +84,9 @@ require_once "config.php";
           <th></th>
           <th></th>
           <th>
-            <select  name="" id="">
+            <select name="" id="">
               <option onclick="searchData()" value="Aberto">Aberto</option>
-              <option onclick="searchData()"  value="Pago">Pago</option>
+              <option onclick="searchData()" value="Pago">Pago</option>
               <option onclick="searchData()" value="Cancelado">Cancelado</option>
             </select>
           </th>
@@ -121,7 +120,7 @@ require_once "config.php";
         $pedido = $pdo->query($cmd);
         $total = mysqli_num_rows($pedido);
 
-  
+
         switch (@$sel) {
           case !isset($_GET['search']):
             $sel = $res;
@@ -147,11 +146,11 @@ require_once "config.php";
           echo "</td>";
           echo "</tr> ";
         }
-                for ($i = 1; $i < $numPaginas + 1; $i++) {
+        for ($i = 1; $i < $numPaginas + 1; $i++) {
           echo "<a href='index.php?pagina=$i'><button id='selecion'>" . $i . "</button></a> ";
         }
         ?>
-        
+
       </table>
     </div>
   </section>
@@ -191,8 +190,8 @@ require_once "config.php";
       }
       ?>
       <form method="post">
-      <section id="cadastrar" class="grid-one main-bg section">
-    <div class="main-content grid-one-content">
+        <section id="cadastrar" class="grid-one main-bg section">
+          <div class="main-content grid-one-content">
             <div class="contact-form">
               <h2>Cadastro de Pedido</h2>
               <fieldset class="form-grid">
@@ -287,84 +286,78 @@ require_once "config.php";
 
 
       <div class="responsive-table">
-<?php
-      $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Aberto%'";
-      $status = $pdo->query($cmd);
-
-      $totalA = mysqli_num_rows($status);
-      
-      $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Pago%'";
-      $status = $pdo->query($cmd);
-
-      $totalP = mysqli_num_rows($status);
-      
-      $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Cancelado%'";
-      $status = $pdo->query($cmd);
-
-      $totalC = mysqli_num_rows($status);
-
-
-
-      ?>
-      <table>
-      <h3>Status pedido</h3><br>
-      <tr>
-        <th>Total Aberto</th>
-        <th>Total Pago</th>
-        <th>Total Cancelado</th>
-      </tr>
-      <?php
-        echo "<tr>";
-        echo "<td>" . $totalA . "</td>";
-        echo "<td>" . $totalP. "</td>";
-        echo "<td>" . $totalC ."</td>";
-    
-        echo "</tr>";
-      
-       
-      ?>
-    </table>
-    <br>
-    <table>
-      <h4>Total de ganho</h4><br>
-      <tr>
-        <th>Total Bruto</th>
-        <th>Total Aberto</th>
-        <th>Total Pago</th>
-        <th>Total Cancelado</th>
-
-      </tr>
-      <?php
-        $cmd = "SELECT sum(valorUnitario) FROM pedido WHERE statusCliente LIKE '%Aberto%'";
+        <?php
+        $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Aberto%'";
         $status = $pdo->query($cmd);
-        $totalh = mysqli_fetch_assoc($status);
-        $totalAberto =array_sum($totalh);
 
-        $cmd = "SELECT sum(valorUnitario) FROM pedido";
-        $status = $pdo->query($cmd);
-        $totalh = mysqli_fetch_assoc($status);
-        $totalBruto =array_sum($totalh);
+        $totalA = mysqli_num_rows($status);
 
-        $cmd = "SELECT sum(valorUnitario) FROM pedido WHERE statusCliente LIKE '%Pago%'";
+        $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Pago%'";
         $status = $pdo->query($cmd);
-        $totalh = mysqli_fetch_assoc($status);
-        $totalPago =array_sum($totalh);
 
-        $cmd = "SELECT sum(valorUnitario) FROM pedido WHERE statusCliente LIKE '%Cancelado%'";
+        $totalP = mysqli_num_rows($status);
+
+        $cmd = "SELECT * FROM pedido WHERE statusCliente LIKE '%Cancelado%'";
         $status = $pdo->query($cmd);
-        $totalh = mysqli_fetch_assoc($status);
-        $totalCancelado =array_sum($totalh);
-    
-        echo "<tr>";
-        echo "<td>$ " . number_format($totalBruto, 2, ',', ' ,') . "</td>";
-        echo "<td>$ " .number_format($totalAberto, 2, ',', ', ') . "</td>";
-        echo "<td>$ " .number_format($totalPago, 2, ',', ', ') . "</td>";
-        echo "<td>$ " .number_format($totalCancelado, 2, ',', ', ') . "</td>";
-        echo "</tr>";
-      
-       
-      ?>
-    </table>
+
+        $totalC = mysqli_num_rows($status);
+        ?>
+        <table>
+          <h4>Status pedido</h4><br>
+          <tr>
+            <th>Total Aberto</th>
+            <th>Total Pago</th>
+            <th>Total Cancelado</th>
+          </tr>
+          <?php
+          echo "<tr>";
+          echo "<td>" . $totalA . "</td>";
+          echo "<td>" . $totalP . "</td>";
+          echo "<td>" . $totalC . "</td>";
+          echo "</tr>";
+          ?>
+        </table>
+        <br>
+        <table>
+          <h4>Total de ganho</h4><br>
+          <tr>
+            <th>Total Bruto</th>
+            <th>Total Aberto</th>
+            <th>Total Pago</th>
+            <th>Total Cancelado</th>
+
+          </tr>
+          <?php
+          $cmd = "SELECT sum(valorUnitario * quantidadePedido) FROM pedido WHERE statusCliente LIKE '%Aberto%'";
+          $status = $pdo->query($cmd);
+          $totalh = mysqli_fetch_assoc($status);
+          $totalAberto = array_sum($totalh);
+
+          $cmd = "SELECT sum(valorUnitario * quantidadePedido) FROM pedido";
+          $status = $pdo->query($cmd);
+          $totalh = mysqli_fetch_assoc($status);
+          $totalBruto = array_sum($totalh);
+
+          $cmd = "SELECT sum(valorUnitario * quantidadePedido) FROM pedido WHERE statusCliente LIKE '%Pago%'";
+          $status = $pdo->query($cmd);
+          $totalh = mysqli_fetch_assoc($status);
+          $totalPago = array_sum($totalh);
+
+          $cmd = "SELECT sum(valorUnitario * quantidadePedido) FROM pedido WHERE statusCliente LIKE '%Cancelado%'";
+          $status = $pdo->query($cmd);
+          $totalh = mysqli_fetch_assoc($status);
+          $totalCancelado = array_sum($totalh);
+
+          echo "<tr>";
+          echo "<td>$ " . number_format($totalBruto, 2, ',', ' ,') . "</td>";
+          echo "<td>$ " . number_format($totalAberto, 2, ',', ', ') . "</td>";
+          echo "<td>$ " . number_format($totalPago, 2, ',', ', ') . "</td>";
+          echo "<td>$ " . number_format($totalCancelado, 2, ',', ', ') . "</td>";
+          echo "</tr>";
+
+
+          ?>
+        </table>
 
       </div>
 

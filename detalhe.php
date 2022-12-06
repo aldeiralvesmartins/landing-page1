@@ -42,6 +42,29 @@ require_once "includes/header2.php";
   ?>
 
 </table>
+<br>
+        <table>
+         <br>
+          <tr>
+            <th>Valor estimado</th>
+      
+
+          </tr>
+          <?php
+          $cmd = "SELECT sum(valorUnitario * quantidadePedido) FROM pedido where id = $id";
+          $status = $pdo->query($cmd);
+          $totalh = mysqli_fetch_assoc($status);
+          $totalReceber = array_sum($totalh);
+
+     
+
+          echo "<tr>";
+          echo "<td>$ " . number_format($totalReceber, 2, ',', ' ,') . "</td>";
+          echo "</tr>";
+
+
+          ?>
+        </table>
 <?php
 
 include 'includes/footer.php';
