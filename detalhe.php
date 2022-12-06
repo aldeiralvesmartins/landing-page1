@@ -15,11 +15,11 @@ require_once "includes/header2.php";
   <th></th>
   </tr>
   <?php
-
+if (!empty($_GET["id"])) {
   $id = $_GET["id"];
 
 
-  $cmd = "SELECT * FROM `produto` WHERE idCliente = '$id'";
+  $cmd = "SELECT * FROM `pedido` WHERE id = '$id'";
   $idc = $pdo->query($cmd);
 
 
@@ -33,12 +33,12 @@ require_once "includes/header2.php";
     echo "<td>$ " . number_format($user_dado['valorUnitario'], 2, ',', ' ') . "</td>";
     echo "<td>" . $user_dado['quantidadePedido'] . "</td>";
     echo "<td>" . $user_dado['statusCliente'] . "</td>";
-    echo "<td><a id='editar' href='editar-detalhe.php?id=" . $user_dado['idCliente'] . "'><button>Editar</button></a>
-        <a id='editar'href='excluir.php?id=" . $user_dado['idCliente'] . "'><button>Excluir</button></a>";
+    echo "<td><a id='editar' href='editar-detalhe.php?id=" . $user_dado['id'] . "'><button>Editar</button></a>
+        <a id='editar'href='excluir.php?id=" . $user_dado['id'] . "'><button>Excluir</button></a>";
     echo "</td>";
     echo "</tr> ";
   }
-
+}
   ?>
 
 </table>

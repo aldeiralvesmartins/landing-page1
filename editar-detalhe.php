@@ -12,7 +12,7 @@ if (!empty($_GET["id"])) {
 
   $id = $_GET['id'];
 
-  $sqlSelect = "SELECT * FROM `produto` WHERE idCliente = '$id'";
+  $sqlSelect = "SELECT * FROM `pedido` WHERE id = '$id'";
   $res = $pdo->query($sqlSelect);
 
   while ($user_dado = mysqli_fetch_assoc($res)) {
@@ -23,8 +23,8 @@ if (!empty($_GET["id"])) {
     $dtPedido = $user_dado['dtPedido'];
     $codBarras = $user_dado['codBarras'];
     $nomeProduto = $user_dado['nomeProduto'];
-    $valorU = $user_dado['quantidadePedido'];
-    $quantidade = $user_dado['valorUnitario'];
+    $valorU = $user_dado['valorUnitario'];
+    $quantidade = $user_dado['quantidadePedido'];
     $status = $user_dado['statusCliente'];
   }
 }
@@ -34,7 +34,7 @@ if (!empty($_GET["id"])) {
 ?>
 
 <h2>EDITAR PEDIDO</h2>
-<a href="cliente.php"><button>Voltar</button></a>
+<a href="index.php"><button>Voltar</button></a>
 <form method="POST" class="form-group">
 
 
@@ -49,13 +49,13 @@ if (!empty($_GET["id"])) {
   <input type="text" placeholder="" name="codBarras" id="codBarras" value="<?php echo  $codBarras ?>"><br><br>
   <label>Nome do produto</label>
   <br>
-  <input type="text" placeholder=" " name="quantidadePedido" id="quantidade" value="<?php echo $nomeProduto  ?>"><br><br>
+ <input type="text" placeholder=" " name="nomeProduto" id="nomeProduto" value="<?php echo $nomeProduto ?>"><br><br>
   <label>Valor unitario</label>
   <br>
-  <input type="text" placeholder=" " name="nomeProduto" id="nomeProduto" value="<?php echo $valorU ?>"><br><br>
+ <input type="text" placeholder=" " name="valorUnitario" id="valorUnitario" value="<?php echo $valorU ?>"><br><br>
   <label>Quantidade</label>
   <br>
-  <input type="text" placeholder=" " name="valorUnitario" id="valorUnitario" value="<?php echo $quantidade ?>"><br><br>
+  <input type="text" placeholder=" " name="quantidadePedido" id="quantidade" value="<?php echo $quantidade  ?>"><br><br>
   <label>Status</label>
   <br>
   <input type="radio" name="statusCliente" value="Aberto" <?php echo ($status == 'Aberto') ?  'checked' : '' ?>> Aberto
@@ -75,7 +75,7 @@ if (!empty($_GET["id"])) {
 
 if (isset($_POST["update"])) {
 
-  $id1 = $_POST['idCliente'];
+  $id1 = $_GET['id'];
 
 
 
@@ -91,10 +91,10 @@ if (isset($_POST["update"])) {
     !empty($cpf) && !empty($dtPedido)
     && !empty($codBarras) && !empty($nomeProduto) && !empty($quantidade) && !empty($valorU) && !empty($status)
   ) {
-    $sqlUpdate = "UPDATE produto SET dtPedido ='$dtPedido',codBarras='$codBarras',nomeProduto='$nomeProduto',quantidadePedido='$quantidade',
-  statusCliente ='$status',cpfCliente='$cpf',valorUnitario='$valorU' where idProduto ='$id1'";
+    $sqlUpdate = "UPDATE pedido SET dtPedido ='$dtPedido',codBarras='$codBarras',nomeProduto='$nomeProduto',quantidadePedido='$quantidade',
+  statusCliente ='$status',cpfCliente='$cpf',valorUnitario='$valorU' where id ='$id1'";
     $res = $pdo->query($sqlUpdate);
-    header('location:cliente.php');
+    header("location:detalhe.php?id=$id");
   } else {
     echo 'preencha todos campos';
   }
