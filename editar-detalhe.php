@@ -49,10 +49,10 @@ if (!empty($_GET["id"])) {
   <input type="text" placeholder="" name="codBarras" id="codBarras" value="<?php echo  $codBarras ?>"><br><br>
   <label>Nome do produto</label>
   <br>
- <input type="text" placeholder=" " name="nomeProduto" id="nomeProduto" value="<?php echo $nomeProduto ?>"><br><br>
+  <input type="text" placeholder=" " name="nomeProduto" id="nomeProduto" value="<?php echo $nomeProduto ?>"><br><br>
   <label>Valor unitario</label>
   <br>
- <input type="text" placeholder=" " name="valorUnitario" id="valorUnitario" value="<?php echo $valorU ?>"><br><br>
+  <input type="text" placeholder=" " name="valorUnitario" id="valorUnitario" value="<?php echo $valorU ?>"><br><br>
   <label>Quantidade</label>
   <br>
   <input type="text" placeholder=" " name="quantidadePedido" id="quantidade" value="<?php echo $quantidade  ?>"><br><br>
@@ -87,10 +87,7 @@ if (isset($_POST["update"])) {
   $valorU = $_POST['valorUnitario'];
   $status = $_POST['statusCliente'];
 
-  if (
-    !empty($cpf) && !empty($dtPedido)
-    && !empty($codBarras) && !empty($nomeProduto) && !empty($quantidade) && !empty($valorU) && !empty($status)
-  ) {
+  if (!empty($cpf) && !empty($dtPedido) && !empty($codBarras) && !empty($nomeProduto) && !empty($quantidade) && !empty($valorU) && !empty($status)) {
     $sqlUpdate = "UPDATE pedido SET dtPedido ='$dtPedido',codBarras='$codBarras',nomeProduto='$nomeProduto',quantidadePedido='$quantidade',
   statusCliente ='$status',cpfCliente='$cpf',valorUnitario='$valorU' where id ='$id1'";
     $res = $pdo->query($sqlUpdate);
